@@ -2,24 +2,9 @@
 import React, { useState } from "react";
 import { useParams } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import {
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  CircularProgress,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Alert, CircularProgress, Snackbar, TextField, Typography } from "@mui/material";
 
-/** Mismo margen que antes, bloque centrado en el ancho disponible */
-const sectionWrap = {
-  margin: "25px 0",
-  width: "100%",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
+import formStyles from "@/styles/commentsForm.module.css";
 
 const CommentPost = ({ onCommentPosted }) => {
   const { id } = useParams();
@@ -29,6 +14,7 @@ const CommentPost = ({ onCommentPosted }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [submitError, setSubmitError] = useState(null);
+  const [successOpen, setSuccessOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,6 +63,7 @@ const CommentPost = ({ onCommentPosted }) => {
 
       setTitle("");
       setBody("");
+      setSuccessOpen(true);
       await onCommentPosted?.();
     } catch (err) {
       console.error("comment post:", err);
@@ -90,101 +77,106 @@ const CommentPost = ({ onCommentPosted }) => {
 
   if (status === "loading") {
     return (
-      <div style={sectionWrap}>
-        <Card sx={{ width: "100%" }}>
-          <CardContent
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: 2,
-              py: 3,
-            }}
-          >
-            <CircularProgress size={22} color="secondary" />
+      <div className={formStyles.formRoot}>
+        <div className={formStyles.formPanel}>
+          <div className={formStyles.loadingInner}>
+            <CircularProgress size={24} color="secondary" />
             <Typography variant="body2" color="text.secondary">
               Cargando sesión…
             </Typography>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     );
   }
 
   if (status === "unauthenticated") {
     return (
-      <div style={sectionWrap}>
-        <Card sx={{ width: "100%" }}>
-          <CardContent sx={{ textAlign: "center" }}>
-            <Typography variant="h6" component="h2" gutterBottom>
-              Comentá
-            </Typography>
+      <div className={formStyles.formRoot}>
+        <div className={formStyles.formPanel}>
+          <div className={formStyles.loginInner}>
+            <p className={formStyles.loginTitle}>Participá en la conversación</p>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
               Para sumar tu voz sobre este mural, iniciá sesión con Google.
             </Typography>
-            <Button
+            <button
               type="button"
-              variant="contained"
-              color="secondary"
+              className={formStyles.loginBtn}
               onClick={() => signIn("google")}
             >
               Ingresar con Google
-            </Button>
-          </CardContent>
-        </Card>
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={sectionWrap}>
-      <Card component="form" onSubmit={handleSubmit} sx={{ width: "100%" }}>
-        <CardContent>
-          <Typography variant="h6" component="h2" gutterBottom>
-            Comentá
-          </Typography>
-          <Typography variant="caption" display="block" color="text.secondary" sx={{ mb: 1 }}>
-            Comentando como {session?.user?.name || session?.user?.email}
-          </Typography>
-          {submitError ? (
-            <Alert severity="error" sx={{ mb: 1 }}>
-              {submitError}
-            </Alert>
-          ) : null}
-          <TextField
-            rows={1}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            label="Título"
-            name="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            disabled={isLoading}
-          />
-          <TextField
-            multiline
-            rows={4}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            label="Tu comentario"
-            name="body"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            disabled={isLoading}
-          />
-          <Button
+    <div className={formStyles.formRoot}>
+      <Snackbar
+        open={successOpen}
+        autoHideDuration={5000}
+        onClose={(_, reason) => {
+          if (reason === "clickaway") return;
+          setSuccessOpen(false);
+        }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setSuccessOpen(false)}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Se publicó tu comentario.
+        </Alert>
+      </Snackbar>
+      <form className={formStyles.formPanel} onSubmit={handleSubmit} noValidate>
+        <p className={formStyles.formTitle}>Dejá tu comentario</p>
+        <p className={formStyles.formHint}>
+          Comentando como {session?.user?.name || session?.user?.email}
+        </p>
+        {submitError ? (
+          <Alert severity="error" className={formStyles.alertBox}>
+            {submitError}
+          </Alert>
+        ) : null}
+        <TextField
+          className={formStyles.field}
+          rows={1}
+          fullWidth
+          margin="none"
+          variant="outlined"
+          label="Título"
+          name="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          disabled={isLoading}
+        />
+        <TextField
+          className={formStyles.field}
+          multiline
+          rows={4}
+          fullWidth
+          margin="none"
+          variant="outlined"
+          label="Tu comentario"
+          name="body"
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          disabled={isLoading}
+        />
+        <div className={formStyles.formActions}>
+          <button
             type="submit"
-            variant="outlined"
-            color="secondary"
+            className={formStyles.submitBtn}
             disabled={isLoading}
-            sx={{ mt: 1 }}
           >
-            {isLoading ? "Enviando…" : "Enviar"}
-          </Button>
-        </CardContent>
-      </Card>
+            {isLoading ? "Publicando…" : "Publicar comentario"}
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

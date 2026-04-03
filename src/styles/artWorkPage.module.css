@@ -2,31 +2,192 @@
   max-width: 1000px;
   margin: 0 auto;
   width: 100%;
-  padding: 32px 16px;
+  padding: clamp(20px, 4vw, 32px) clamp(12px, 3vw, 16px);
 }
 
-.artWorkComments {
-  flex-direction: column;
-  justify-content: center;
+/* Zona aparte del mural: banda con gradiente, borde rosa, sombra */
+.commentsBand {
+  margin-top: clamp(36px, 6vw, 56px);
+  width: 100%;
+  max-width: min(760px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding: clamp(18px, 4vw, 32px);
+  border-radius: 18px;
+  border: 1px solid rgba(233, 30, 140, 0.28);
+  background: linear-gradient(
+    155deg,
+    #fff8fb 0%,
+    #ffffff 38%,
+    #fef6fa 72%,
+    #fffafc 100%
+  );
+  box-shadow:
+    0 10px 48px rgba(156, 20, 80, 0.1),
+    0 4px 16px rgba(194, 24, 91, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.commentsHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: clamp(12px, 3vw, 16px);
+  margin-bottom: clamp(18px, 3.5vw, 28px);
+}
+
+.titleIconBox {
+  flex-shrink: 0;
+  width: clamp(44px, 10vw, 52px);
+  height: clamp(44px, 10vw, 52px);
+  border-radius: 14px;
+  display: flex;
   align-items: center;
-  margin: 0 1rem;
-  margin-top: 48px;
-  border-top: 2px solid #f5e0ea;
+  justify-content: center;
+  background: linear-gradient(145deg, #ec407a 0%, #c2185b 42%, #9c1450 100%);
+  box-shadow:
+    0 6px 20px rgba(156, 20, 80, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
-.commentPost {
+.titleIcon {
+  color: #fff;
+  font-size: clamp(1.35rem, 4vw, 1.65rem);
+  width: 1em;
+  height: 1em;
 }
 
-.commentsListContainer {
+.commentsTitleBlock {
+  flex: 1;
+  min-width: 0;
 }
 
-@media (width > 800px) {
-  .commentsListContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
+.commentsTitle {
+  font-size: clamp(1.4rem, 4.2vw, 1.85rem);
+  font-weight: 700;
+  color: #9c1450;
+  margin: 0 0 8px;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.commentsLead {
+  font-size: clamp(0.9rem, 2.4vw, 0.98rem);
+  color: #5c5c5c;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.commentsLayout {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(22px, 4vw, 32px);
+  width: 100%;
+}
+
+/* Hilo vertical + punto por ítem */
+.commentsList {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0 8px;
+  padding-left: clamp(22px, 5vw, 32px);
+  position: relative;
+}
+
+.commentsList::before {
+  content: "";
+  position: absolute;
+  left: clamp(9px, 2.2vw, 13px);
+  top: 12px;
+  bottom: 20px;
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(
+    180deg,
+    #f48fb1 0%,
+    #f8bbd9 45%,
+    rgba(248, 187, 217, 0.35) 100%
+  );
+  box-shadow: 0 0 12px rgba(233, 30, 140, 0.12);
+}
+
+.commentsList li {
+  position: relative;
+  padding-left: clamp(6px, 1.5vw, 10px);
+  margin-bottom: clamp(14px, 3vw, 20px);
+}
+
+.commentsList li:last-child {
+  margin-bottom: 0;
+}
+
+.commentsList li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * clamp(17px, 4.2vw, 24px));
+  top: clamp(18px, 4vw, 26px);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #d81b60;
+  box-shadow:
+    0 0 0 4px rgba(216, 27, 96, 0.12),
+    0 2px 8px rgba(156, 20, 80, 0.2);
+  z-index: 1;
+}
+
+.emptyComments {
+  text-align: center;
+  color: #555;
+  font-size: clamp(0.9rem, 2.4vw, 0.98rem);
+  line-height: 1.65;
+  margin: 0;
+  padding: clamp(22px, 4vw, 32px) clamp(16px, 3vw, 24px);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(6px);
+  border-radius: 14px;
+  border: 2px dashed rgba(216, 27, 96, 0.42);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 600px) {
+  .commentsBand {
+    padding: 16px 14px;
+    border-radius: 14px;
+  }
+
+  .commentsHeader {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .titleIconBox {
+    border-radius: 12px;
+  }
+
+  .commentsList {
+    padding-left: 26px;
+  }
+
+  .commentsList::before {
+    left: 8px;
+    width: 2px;
+  }
+
+  .commentsList li::before {
+    left: -17px;
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .commentsList {
+    padding-left: 22px;
+  }
+
+  .commentsList li::before {
+    left: -15px;
   }
 }

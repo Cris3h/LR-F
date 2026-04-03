@@ -1,56 +1,85 @@
 import Image from "next/image";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
 
 import btnB from "../images/btnB.png";
 
 import styles from "../styles/commentCard.module.css";
 
-export default function CommentCard({ user, title, body, picture }) {
+export default function CommentCard({
+  user,
+  title,
+  body,
+  picture,
+  commentId,
+  isMine = false,
+}) {
   const showGoogleAvatar = Boolean(
     picture && typeof picture === "string" && picture.startsWith("http")
   );
 
+  const titleHeadingId = commentId
+    ? `comment-title-${commentId}`
+    : undefined;
+
   return (
-    <Card
-      sx={{
-        maxWidth: 550,
-        marginBottom: "30px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-      }}
+    <article
+      className={`${styles.commentCard} ${isMine ? styles.commentCardMine : ""}`}
+      aria-labelledby={titleHeadingId}
+      data-comment-own={isMine ? "true" : undefined}
     >
-      <div className={styles.commentHeader}>
-        {showGoogleAvatar ? (
-          <Image
-            src={picture}
-            alt=""
-            width={40}
-            height={40}
-            className={styles.avatar}
-          />
-        ) : (
-          <Image
-            src={btnB}
-            alt=""
-            width={40}
-            height={40}
-            className={styles.btnb}
-          />
-        )}
+      <header
+        className={`${styles.commentHeader} ${isMine ? styles.commentHeaderMine : ""}`}
+      >
+        <div
+          className={`${styles.avatarWrap} ${isMine ? styles.avatarWrapMine : ""}`}
+        >
+          {showGoogleAvatar ? (
+            <Image
+              src={picture}
+              alt={user ? `Foto de perfil de ${user}` : ""}
+              width={48}
+              height={48}
+              className={styles.avatar}
+            />
+          ) : (
+            <Image
+              src={btnB}
+              alt=""
+              width={48}
+              height={48}
+              className={styles.btnb}
+            />
+          )}
+        </div>
         <div className={styles.authorBlock}>
           <p className={styles.authorName}>{user}</p>
-          <span className={styles.authorHint}>Comunidad Listón Rosa</span>
+          <span className={styles.authorHint}>
+            {isMine ? (
+              <>
+                <span className={styles.mineBadge}>Tu comentario</span>
+                <span className={styles.authorHintSep}> · </span>
+              </>
+            ) : null}
+            Comunidad Listón Rosa
+          </span>
         </div>
-      </div>
-      <CardContent sx={{ pt: 1.5, px: 2, pb: 2 }}>
-        <Typography gutterBottom variant="h5" component="h3">
+      </header>
+      <div className={styles.commentBody}>
+        <h3 className={styles.commentTitle} id={titleHeadingId}>
           {title}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="div">
+        </h3>
+        <p className={styles.commentText}>
+          <span className={styles.typoQuote} aria-hidden="true">
+            &#8220;
+          </span>
           {body}
-        </Typography>
-      </CardContent>
-    </Card>
+          <span
+            className={`${styles.typoQuote} ${styles.typoQuoteEnd}`}
+            aria-hidden="true"
+          >
+            &#8221;
+          </span>
+        </p>
+      </div>
+    </article>
   );
 }
