@@ -1,0 +1,47 @@
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background: rgba(251, 132, 171, 0.08);
+  border: 1px solid rgba(251, 132, 171, 0.2);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.description {
+  margin: 0 0 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: rgb(90, 52, 62);
+}
+
+.placeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.placeItem {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: rgb(140, 100, 112);
+}
+
+.placeLabel {
+  font-weight: 600;
+  color: rgb(193, 136, 145);
+  margin-right: 0.35rem;
+}
+
+.secondaryBtn {
+  color: rgb(140, 100, 112) !important;
+}
