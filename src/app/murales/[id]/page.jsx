@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 import { fetchSingleArtWork } from "@/utils/fetchs";
@@ -16,6 +16,12 @@ export default function Details() {
   const [error, setErrorState] = useState(false);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+
+  const refetchArtwork = useCallback(async () => {
+    const data = await fetchSingleArtWork(id);
+    const [err, obj] = data;
+    if (!err && obj) setDetails(obj);
+  }, [id]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,13 +48,18 @@ export default function Details() {
 
         <div className={styles.artWorkComments}>
           <div className={styles.commentPost}>
-            <CommentPost />
+            <CommentPost onCommentPosted={refetchArtwork} />
           </div>
 
           <div className={styles.commentsListContainer}>
             {details.comments?.map((e, i) => (
               <section key={e._id?.toString?.() ?? i}>
-                <CommentCard user={e.user} title={e.title} body={e.body} />
+                <CommentCard
+                  user={e.user}
+                  title={e.title}
+                  body={e.body}
+                  picture={e.picture}
+                />
               </section>
             ))}
           </div>

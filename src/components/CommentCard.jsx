@@ -7,26 +7,47 @@ import btnB from "../images/btnB.png";
 
 import styles from "../styles/commentCard.module.css";
 
-export default function CommentCard({ user, title, body }) {
+export default function CommentCard({ user, title, body, picture }) {
+  const showGoogleAvatar = Boolean(
+    picture && typeof picture === "string" && picture.startsWith("http")
+  );
+
   return (
     <Card
       sx={{
-        minHeight: 200,
         maxWidth: 550,
         marginBottom: "30px",
         boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-        overflowY: "auto",
       }}
     >
       <div className={styles.commentHeader}>
-        <Image src={btnB} alt="user avatar" className={styles.btnb} />
-        <p>{user}</p>
+        {showGoogleAvatar ? (
+          <Image
+            src={picture}
+            alt=""
+            width={40}
+            height={40}
+            className={styles.avatar}
+          />
+        ) : (
+          <Image
+            src={btnB}
+            alt=""
+            width={40}
+            height={40}
+            className={styles.btnb}
+          />
+        )}
+        <div className={styles.authorBlock}>
+          <p className={styles.authorName}>{user}</p>
+          <span className={styles.authorHint}>Comunidad Listón Rosa</span>
+        </div>
       </div>
-      <CardContent sx={{ pt: 2, px: 2, pb: 2 }}>
-        <Typography gutterBottom variant="h5" component="div">
+      <CardContent sx={{ pt: 1.5, px: 2, pb: 2 }}>
+        <Typography gutterBottom variant="h5" component="h3">
           {title}
         </Typography>
-        <Typography variant="body2" color="text">
+        <Typography variant="body2" color="textSecondary" component="div">
           {body}
         </Typography>
       </CardContent>

@@ -1,23 +1,46 @@
-.commentHeader{
+.commentHeader {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 0.5rem;
     border-style: none none solid;
     border-color: rgb(251, 132, 171);
-    max-height: 100px;
     width: 100%;
+    padding: 12px 12px 10px;
 }
 
-.commentHeader p{
+.authorBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.authorName {
     font-weight: bold;
+    margin: 0;
+    line-height: 1.2;
 }
 
-.commentHeader img{
+.authorHint {
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.55);
+    margin-top: 2px;
+}
+
+.commentHeader img,
+.avatar {
     justify-self: start;
     align-self: center;
     width: 40px;
-    height: auto;
-    margin: 15px;
+    height: 40px;
+    margin: 0;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.avatar {
+    border-radius: 50%;
 }
 
 
