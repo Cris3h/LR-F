@@ -7,10 +7,12 @@
 
 module.exports = {
     images: {
-        domains: ["www.parqueavellanedaweb.com.ar", 
-            'content.cuerpomente.com', 
-            's1.elespanol.com',
-            'content.clara.es'
+        domains: [
+            "www.parqueavellanedaweb.com.ar",
+            "content.cuerpomente.com",
+            "s1.elespanol.com",
+            "content.clara.es",
+            "lh3.googleusercontent.com",
         ],
     },
 
