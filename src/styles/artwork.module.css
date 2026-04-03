@@ -1,0 +1,29 @@
+.mainContainer{
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.imgContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.artworkCont{
+    display: flex;
+    flex-direction: column;
+}
+
+.artworkCont h3{
+    text-align: center;
+}
+
+.artworkCont article{
+    align-self: center;
+    margin: 15px 15px 15px 15px;
+}
+
+.artworkCont p{
+    margin-left: 15px;
+}

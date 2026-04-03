@@ -1,0 +1,43 @@
+[
+    {
+      "id": 1,
+      "question": "¿Si carezco de antecedentes familiares, puedo desarrollar cáncer de mama?",
+      "answer": "El 85% de los cánceres de mama no son hereditarios. La mayoría de las pacientes no tienen familiares directos con cáncer de mama."
+    },
+    {
+      "id": 2,
+      "question": "¿Un nódulo es sinónimo de cáncer de mama?",
+      "answer": "Siempre es importante consultar con un médico especialista después de obtener un resultado. En el caso de los nódulos, más del 90% son benignos."
+    },
+    {
+      "id": 3,
+      "question": "¿Los hombres pueden tener cáncer de mama?",
+      "answer": "Sí, solo representa el 1% de los cánceres en los hombres, una posibilidad muy baja."
+    },
+    {
+      "id": 4,
+      "question": "Si soy mujer trans ¿puedo tener cáncer de mama?",
+      "answer": "Sí. De hecho es importante que realices los controles ginecológicos anuales, sobre todo si haces o hiciste tratamiento hormonal."
+    },
+    {
+      "id": 5,
+      "question": "¿La mamografía es dolorosa?",
+      "answer": "No. Algunas mujeres con mamas sensibles experimentan incomodidad."
+    },
+    {
+      "id": 6,
+      "question": "¿A partir de qué edad tengo que hacerme una mamografía?",
+      "answer": "Tu médico debe evaluar tus factores de riesgo, tu historia personal y familiar. A partir de ello, deben acordar realizar la primera mamografía; generalmente, es entre los 35 y 40 años. Antes, se evalúa con otros métodos como la ecografía y el examen físico ginecológico."
+    },
+    {
+      "id": 7,
+      "question": "¿Puedo realizarme una mamografía si tengo implantes?",
+      "answer": "Sí se puede realizar; es importante que lo menciones para que el especialista realice la maniobra correspondiente para la evaluación."
+    },
+    {
+      "id": 8,
+      "question": "¿Sin presencia de síntomas, no debo preocuparme?",
+      "answer": "El cáncer de mama no produce síntomas en sus etapas iniciales; por eso, es tan importante el autoexamen, los controles ginecológicos y las mamografías."
+    }
+  ]
+  

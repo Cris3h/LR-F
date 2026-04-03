@@ -1,0 +1,136 @@
+.mainContainer {
+  margin: 0 12px;
+  /* text-align: start; */
+
+}
+
+.storyTellingContainer {
+
+}
+
+.storyTellingContainer p{
+}
+
+/* UL */
+.members {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CARD */
+.membContainer {
+  display: flex;
+  width: calc(100% - 15%);
+  margin: 5px 0;
+  /* border-style: solid none solid; */
+  align-items: center;
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imgContainer img {
+  width: 190px;
+  height: 190px;
+  height: auto;
+  margin: 10px 0;
+  border-radius: 25px;
+}
+
+.descripContainer {
+  display: grid;
+  justify-content: center;
+  align-items: start;
+}
+
+.descripContainer p{
+    margin: 0 0 0 10px;
+}
+
+.descripContainer ul{
+    
+}
+
+.descripContainer ul li {
+    list-style: none;
+    margin-block-start: 0;
+    -webkit-margin-before: 0;
+}
+
+.finalSection{
+    margin: 25px 0;
+}
+
+.muralImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.muralImage img{
+    width: calc(100% - 5%);
+    height: auto;
+}
+
+@media(760px <= width <= 1200px){
+  .mainContainer{
+    margin: 0 40px;
+  }
+
+  .storyTellingContainer p{
+    font-size: 19px;
+  }
+  .imgContainer img{
+    width: 350px;
+  }
+  .membName{
+    font-size: 19px;
+  }
+  .descripContainer li{
+    font-size: 19px;
+  }
+  .finalSection aside{
+    font-size: 19px;
+  }
+  .muralImage img{
+    height: 750px;
+    width: auto;
+  }
+  .membContainer:hover{
+    transform: scale(1.005);
+    background-color: rgb(255,255,255) 0 0 0 5px;
+  }
+}
+@media(width >= 1200px){
+  .mainContainer{
+    margin: 0 65px;
+  }
+  .muralImage img{
+    width: 550px;
+    height: auto;
+  }
+  .storyTellingContainer p{
+    font-size: 19px;
+  }
+  .imgContainer img{
+    width: 350px;
+  }
+  .membName{
+    font-size: 19px;
+  }
+  .descripContainer li{
+    font-size: 19px;
+  }
+  .finalSection aside{
+    font-size: 19px;
+    text-align: center;
+  }
+  .membContainer:hover{
+    transform: scale(1.005);
+
+  }
+}

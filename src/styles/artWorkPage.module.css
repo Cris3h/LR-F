@@ -1,0 +1,39 @@
+
+
+.mainContainer{
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.artWorkComments{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1rem
+}
+
+.artWorkComments h4{
+    border-top: var(--pink-border-color);
+    text-align: center;
+}
+
+.commentPost{
+
+}
+
+.commentsListContainer{
+
+}
+
+@media (width > 800px){
+    .commentsListContainer{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+    }
+}
+

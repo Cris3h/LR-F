@@ -1,0 +1,23 @@
+.commentHeader{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-style: none none solid;
+    border-color: rgb(251, 132, 171);
+    max-height: 100px;
+    width: 100%;
+}
+
+.commentHeader p{
+    font-weight: bold;
+}
+
+.commentHeader img{
+    justify-self: start;
+    align-self: center;
+    width: 40px;
+    height: auto;
+    margin: 15px;
+}
+
+
