@@ -56,14 +56,15 @@ const CommentPost = () => {
 
   return (
     <div style={{ margin: "25px 0" }}>
-      <Card>
+      <Card component="form" onSubmit={handleSubmit}>
         <CardContent>
-          <Typography variant="h6">Comenta!</Typography>
+          <Typography variant="h6">Comentá</Typography>
           <TextField
             rows={1}
             fullWidth
+            margin="normal"
             variant="outlined"
-            label="Titulo"
+            label="Título"
             name="title"
             onChange={handleOnChange}
           />
@@ -71,18 +72,19 @@ const CommentPost = () => {
             multiline
             rows={4}
             fullWidth
+            margin="normal"
             variant="outlined"
-            label="Tu comentario acá"
+            label="Tu comentario"
             name="body"
             onChange={handleOnChange}
           />
           <Button
+            type="submit"
             variant="outlined"
             color="secondary"
-            onClick={handleSubmit}
             disabled={isLoading}
           >
-            Submit
+            Enviar
           </Button>
         </CardContent>
       </Card>

@@ -1,29 +1,77 @@
-.mainContainer{
-    max-width: 1000px;
-    margin: 0 auto;
-    width: 100%;
+.mainContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 16px 48px;
 }
 
-.imgContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.imgContainer {
+  width: 100%;
+  margin-bottom: 32px;
 }
 
-.artworkCont{
-    display: flex;
-    flex-direction: column;
+/* Variante hero: mismo layout que carousel + ancho completo del contenedor */
+.carouselHero {
+  composes: carousel from "./carousel.module.css";
+  max-width: 100%;
 }
 
-.artworkCont h3{
-    text-align: center;
+.artworkCont {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 8px;
 }
 
-.artworkCont article{
-    align-self: center;
-    margin: 15px 15px 15px 15px;
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
 }
 
-.artworkCont p{
-    margin-left: 15px;
+.location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.description {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #333;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.backstage {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid #f0d0e0;
+}
+
+.backstage h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #c2185b;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
 }

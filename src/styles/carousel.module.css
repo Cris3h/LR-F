@@ -1,61 +1,303 @@
+/* Carrusel: foto limpia (sin overlays); controles en barra inferior. Ancho máx. 720px como antes. */
+
 .carousel {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 600px;
-  height: 400px;
-  margin: 0 20px;
-}
-.slide {
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 7px #666;
   width: 100%;
-  height: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  outline: none;
 }
 
-.slideHidden{
-    display: none;
+.carousel:focus-visible {
+  border-radius: 22px;
+  box-shadow: 0 0 0 3px rgba(251, 132, 171, 0.35);
 }
 
-.arrow {
+/* Solo imágenes: sin botones ni degradados encima */
+.viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: zoom-in;
+  background: linear-gradient(145deg, #faf5f7 0%, #f0e8ec 50%, #e8dfe4 100%);
+  box-shadow:
+    0 4px 6px -1px rgba(120, 82, 92, 0.08),
+    0 12px 24px -8px rgba(120, 82, 92, 0.18),
+    0 0 0 1px rgba(251, 132, 171, 0.12);
+}
+
+.slideLayer {
   position: absolute;
-  width: 2rem;
-  height: 2rem;
-  color: white;
-  filter: drop-shadow(0px 0px 5px #555);
+  inset: 0;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.arrow{
-    cursor: pointer;
+.slideLayer[data-active="true"] {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
 }
 
-.arrowLeft{
-    left: 1rem;
+.slideImg {
+  object-fit: cover;
 }
 
-.arrowRight{
-    right: 1rem;
+@media (prefers-reduced-motion: reduce) {
+  .slideLayer {
+    transition: none;
+  }
 }
 
-.indicators{
-    display: flex;
-    position: absolute;
-    bottom: 1rem;
+/* Barra bajo la foto: no tapa la imagen */
+.toolbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px 14px;
+  width: 100%;
+  margin-top: 14px;
+  padding: 0 2px;
 }
 
-.indicator{
-    background-color: white;
-    height: 0.5rem;
-    width: 0.5rem;
-    border-radius: 100%;
-    border: none;
-    outline: none;
-    box-shadow: 0px 0px 5px #555;
-    margin: 0 0.2rem;
-    cursor: pointer;
+.toolbarCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
 }
 
-.indicatorInactive{
-    background-color: gray;
+.navBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(193, 24, 91, 0.22);
+  border-radius: 12px;
+  background: #fff;
+  color: rgb(120, 82, 92);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(120, 82, 92, 0.08);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.navBtn:hover {
+  background: rgba(255, 240, 248, 0.85);
+  border-color: rgba(193, 24, 91, 0.35);
+}
+
+.navBtn:focus-visible {
+  outline: 2px solid rgba(251, 132, 171, 0.65);
+  outline-offset: 2px;
+}
+
+.navBtn:active {
+  transform: scale(0.97);
+}
+
+.chevron {
+  width: 20px;
+  height: 20px;
+}
+
+.counter {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgb(120, 82, 92);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100%;
+}
+
+.dot {
+  height: 7px;
+  min-width: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(193, 24, 91, 0.2);
+  cursor: pointer;
+  transition:
+    width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.2s ease;
+}
+
+.dot[data-active="true"] {
+  width: 22px;
+  background: rgb(193, 24, 91);
+}
+
+.dot:not([data-active="true"]):hover {
+  background: rgba(193, 24, 91, 0.4);
+}
+
+.dot:focus-visible {
+  outline: 2px solid rgba(251, 132, 171, 0.65);
+  outline-offset: 2px;
+}
+
+/* Móvil: misma proporción 4/3 que desktop (más área útil que el 1:1 anterior); controles compactos */
+@media (max-width: 520px) {
+  .viewport {
+    border-radius: 16px;
+  }
+
+  .toolbar {
+    margin-top: 12px;
+    gap: 8px 10px;
+  }
+
+  .navBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .chevron {
+    width: 18px;
+    height: 18px;
+  }
+
+  .toolbarCenter {
+    gap: 6px;
+  }
+
+  .counter {
+    font-size: 0.75rem;
+  }
+
+  .dots {
+    gap: 5px;
+  }
+}
+
+/* —— Lightbox: imagen grande, fondo con blur en márgenes —— */
+.lightboxRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(12px, env(safe-area-inset-top, 0px))
+    max(12px, env(safe-area-inset-right, 0px))
+    max(12px, env(safe-area-inset-bottom, 0px))
+    max(12px, env(safe-area-inset-left, 0px));
+  background: rgba(22, 12, 18, 0.52);
+  backdrop-filter: blur(22px) saturate(1.15);
+  -webkit-backdrop-filter: blur(22px) saturate(1.15);
+  box-sizing: border-box;
+  animation: lightboxFadeIn 0.22s ease;
+}
+
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightboxRoot {
+    animation: none;
+  }
+}
+
+.lightboxPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
+  pointer-events: auto;
+}
+
+.lightboxFigure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  max-width: min(96vw, 1680px);
+  max-height: min(88vh, 92dvh);
+}
+
+.lightboxImg {
+  display: block;
+  max-width: min(96vw, 1680px);
+  max-height: min(88vh, 92dvh);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.lightboxClose {
+  position: fixed;
+  top: max(10px, env(safe-area-inset-top, 0px));
+  right: max(10px, env(safe-area-inset-right, 0px));
+  z-index: 10052;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  background: rgba(40, 28, 34, 0.55);
+  color: #fff;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.lightboxClose:hover {
+  background: rgba(60, 42, 52, 0.75);
+}
+
+.lightboxClose:focus-visible {
+  outline: 2px solid rgba(251, 132, 171, 0.85);
+  outline-offset: 2px;
+}
+
+.lightboxClose:active {
+  transform: scale(0.96);
+}
+
+@media (max-width: 520px) {
+  .lightboxClose {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
 }
