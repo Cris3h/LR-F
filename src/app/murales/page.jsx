@@ -4,6 +4,7 @@ import { GlobalContext } from "@/AppContext/AppContext";
 import CardList from "@/components/Card";
 import Loading from "@/components/Loading";
 import styles from '@/styles/murales.module.css'
+import { primaryArtworkImage } from "@/utils/artworkImages";
 
 export default function Murales() {
   const { artWork, isLoading } = useContext(GlobalContext);
@@ -49,7 +50,7 @@ export default function Murales() {
             <CardList
               key={a._id}
               id={a._id}
-              image={a.image}
+              image={primaryArtworkImage(a)}
               name={a.name}
               place={a.place}
               description={a.description}

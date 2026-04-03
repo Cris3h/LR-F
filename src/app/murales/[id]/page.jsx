@@ -6,13 +6,15 @@ import { fetchSingleArtWork } from "@/utils/fetchs";
 import ArtWork from "@/components/ArtWork";
 import CommentPost from "@/components/CommentPost";
 import CommentCard from "@/components/CommentCard";
-import ArtModal from "@/components/ArtModal";
 
 import styles from "@/styles/artWorkPage.module.css";
+import Loading from "@/components/Loading";
+import { coalesceArtworkImages } from "@/utils/artworkImages";
 
 export default function Details() {
-  const [details, setDetails] = useState({});
+  const [details, setDetails] = useState(null);
   const [error, setErrorState] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
@@ -20,29 +22,22 @@ export default function Details() {
       const data = await fetchSingleArtWork(id);
       const [error, obj] = data;
       error ? setErrorState(true) : setDetails(obj);
+      setLoading(false);
     };
     fetchData();
   }, [id]);
 
+  if (loading) return <Loading />;
+  if (error) return <p>No pudimos cargar esta obra. Intentá de nuevo más tarde.</p>;
   return (
     <div className="">
-
-      {/* BackStage Modal*/}
-      <ArtModal
-        backstage={details.backstage ? details.backstage : undefined}
-        title={details.name}
-      />
-
-      {/* Card */}
       <div className={styles.mainContainer}>
         <ArtWork
-          id={details._id}
-          comments={details.comments}
           description={details.description}
-          image={details.image}
+          images={coalesceArtworkImages(details)}
           name={details.name}
           place={details.place}
-          coordinates={details.coordinates}
+          videoUrl={details?.backstage ?? null}
         />
 
         <div className={styles.artWorkComments}>

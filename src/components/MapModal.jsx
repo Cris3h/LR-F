@@ -13,6 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import popupStyles from "@/styles/mapPopupContent.module.css";
 import modalStyles from "@/styles/mapModal.module.css";
+import { primaryArtworkImage } from "@/utils/artworkImages";
 
 export default function MapModal({ id, details: initialDetails }) {
   const [open, setOpen] = useState(false);
@@ -44,6 +45,7 @@ export default function MapModal({ id, details: initialDetails }) {
     .join(" · ");
 
   const descriptionPreview = detailsCutter(details?.description);
+  const previewImage = primaryArtworkImage(details);
 
   return details ? (
     <div>
@@ -129,10 +131,10 @@ export default function MapModal({ id, details: initialDetails }) {
             py: 2.5,
           }}
         >
-          {details.image ? (
+          {previewImage ? (
             <div className={modalStyles.imageWrap}>
               <Image
-                src={details.image}
+                src={previewImage}
                 alt={details.name ? `Mural: ${details.name}` : "Mural"}
                 fill
                 sizes="(max-width: 600px) 100vw, 504px"

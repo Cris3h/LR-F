@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { CardActionArea } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -15,24 +14,22 @@ export default function CommentCard({ user, title, body }) {
         minHeight: 200,
         maxWidth: 550,
         marginBottom: "30px",
-        boxShadow: "1px 2px 3px purple",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
         overflowY: "auto",
       }}
     >
-      <CardActionArea>
-        <div className={styles.commentHeader}>
-          <Image src={btnB} alt="user avatar" className={styles.btnb} />
-          <p>{user}</p>
-        </div>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {title}
-          </Typography>
-          <Typography variant="body2" color="text">
-            {body}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+      <div className={styles.commentHeader}>
+        <Image src={btnB} alt="user avatar" className={styles.btnb} />
+        <p>{user}</p>
+      </div>
+      <CardContent sx={{ pt: 2, px: 2, pb: 2 }}>
+        <Typography gutterBottom variant="h5" component="div">
+          {title}
+        </Typography>
+        <Typography variant="body2" color="text">
+          {body}
+        </Typography>
+      </CardContent>
     </Card>
   );
 }
