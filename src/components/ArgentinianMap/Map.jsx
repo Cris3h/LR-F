@@ -5,13 +5,17 @@ import MapMarker from "../MapMarker";
 import { GlobalContext } from "@/AppContext/AppContext";
 import "leaflet/dist/leaflet.css";
 import styles from "@/styles/maparg.module.css";
-import Loading from "@/app/loading/Loading";
+import Loading from "@/components/Loading";
 
 
 const MapAr = () => {
-  const { artWork } = useContext(GlobalContext);
+  const { artWork, isLoading } = useContext(GlobalContext);
 
- return artWork ? (
+  if (isLoading) {
+    return <Loading variant="inline" />;
+  }
+
+ return (
     <div className={styles.mainContainer}>
       <MapContainer
         style={{ width: "100%" }}
@@ -29,11 +33,11 @@ const MapAr = () => {
         />
         {/* {artWork && (<Link href={<MapModal/>}> <MapMarker artWork={artWork} /> </Link>)} */}
 
-        {artWork && <MapMarker artWork={artWork} />}
+        {artWork?.length ? <MapMarker artWork={artWork} /> : null}
 
       </MapContainer>
     </div>
-  ) : (<><Loading /></>);
+  );
 };
 
 export default MapAr;
