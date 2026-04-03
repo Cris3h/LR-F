@@ -1,6 +1,5 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Loading from "@/app/loading/Loading";
 import { Marker, Popup } from "react-leaflet";
 import MarkerIcon from "../../node_modules/leaflet/dist/images/marker-icon.png";
 import MarkerShadow from "../../node_modules/leaflet/dist/images/marker-shadow.png";
@@ -76,7 +75,7 @@ const MapMarker = ({ artWork }) => {
   );
 
   if (!artWork?.length) {
-    return <Loading />;
+    return null;
   }
 
   return all.map((e, i) => (
