@@ -19,6 +19,59 @@
   z-index: 0;
 }
 
+/* Leaflet popup — scoped to this map only */
+.mapContainer :global(.leaflet-popup) {
+  margin-bottom: 12px;
+}
+
+.mapContainer :global(.leaflet-popup-content-wrapper) {
+  padding: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 24px rgba(120, 82, 92, 0.14),
+    0 1px 3px rgba(120, 82, 92, 0.08);
+  border: 1px solid rgba(251, 132, 171, 0.35);
+  background: linear-gradient(180deg, #fffefb 0%, #fff5f9 100%);
+}
+
+.mapContainer :global(.leaflet-popup-content) {
+  margin: 0;
+  min-height: unset;
+  line-height: 1.35;
+}
+
+.mapContainer :global(.leaflet-popup-tip) {
+  background: #fff5f9;
+  border: 1px solid rgba(251, 132, 171, 0.28);
+  border-top: none;
+  border-left: none;
+  box-shadow: 2px 2px 4px rgba(120, 82, 92, 0.06);
+}
+
+.mapContainer :global(.leaflet-popup-close-button) {
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 8px;
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 600;
+  color: rgb(120, 82, 92);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(251, 132, 171, 0.25);
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.mapContainer :global(.leaflet-popup-close-button:hover) {
+  background: rgba(255, 240, 248, 0.95);
+  color: rgb(160, 90, 110);
+}
+
 @media (width >= 768px) {
   .mapContainer {
     height: min(80vh, 720px) !important;

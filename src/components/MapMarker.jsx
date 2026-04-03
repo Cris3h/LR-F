@@ -56,7 +56,7 @@ function ArtMarker({ artId, coordinates, title }) {
       eventHandlers={eventHandlers}
     >
       {details && (
-        <Popup>
+        <Popup maxWidth={320} minWidth={220} offset={[0, 8]}>
           <MapModal id={artId} details={details} />
         </Popup>
       )}
