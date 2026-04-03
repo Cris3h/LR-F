@@ -7,3 +7,9 @@ export const contact = {
   phoneTel: "+541145889652",
   address: "Las Heras 4588, CABA",
 };
+
+/** Enlaces de donación; actualizar matecito cuando la cuenta esté activa. */
+export const donationLinks = {
+  cafecito: "https://cafecito.app/listonrosa",
+  matecito: "https://cafecito.app/listonrosa",
+};

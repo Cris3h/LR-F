@@ -25,6 +25,13 @@ function isCommentFromSession(commentUser, session) {
   return cu === name || cu === email;
 }
 
+/** Oculta comentarios sin título o sin texto (solo espacios cuentan como vacío). */
+function isCommentNonEmpty(c) {
+  const title = typeof c?.title === "string" ? c.title.trim() : "";
+  const body = typeof c?.body === "string" ? c.body.trim() : "";
+  return title.length > 0 && body.length > 0;
+}
+
 export default function Details() {
   const [details, setDetails] = useState(null);
   const [error, setErrorState] = useState(false);
@@ -51,7 +58,9 @@ export default function Details() {
   if (loading) return <Loading />;
   if (error) return <p>No pudimos cargar esta obra. Intentá de nuevo más tarde.</p>;
 
-  const comments = Array.isArray(details.comments) ? details.comments : [];
+  const comments = (
+    Array.isArray(details.comments) ? details.comments : []
+  ).filter(isCommentNonEmpty);
   const hasComments = comments.length > 0;
 
   return (

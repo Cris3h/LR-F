@@ -1,84 +1,161 @@
-.mainContainer {
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: clamp(1.25rem, 3vw, 1.5rem);
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (width >= 768px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2rem);
+  }
+}
+
+.item {
+  width: 100%;
+  max-width: 400px;
+}
+
+.card {
+  height: 100%;
+  margin: 0;
+}
+
+.cardLink {
   display: flex;
   flex-direction: column;
-  justify-items: center;
-  margin-bottom: 7rem;
-}
-
-.mediaContainer {
-  margin: 25px 8px;
-  text-decoration: none;
-}
-
-.mediaContainer a {
+  height: 100%;
+  min-height: 100%;
   text-decoration: none;
   color: inherit;
+  background: #fdf8fa;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(232, 71, 139, 0.12);
+  box-shadow:
+    0 10px 32px rgba(45, 32, 38, 0.07),
+    0 2px 8px rgba(232, 71, 139, 0.06);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.imageContainer {
-  display: flex;
-  border-radius: 12px;
-  padding: 5px;
-  background: rgb(25, 24, 24);
-  background: linear-gradient(
-    232deg,
-    rgba(25, 24, 24, 1) 10%,
-    rgba(48, 47, 47, 1) 61%,
-    rgba(45, 45, 45, 1) 77%,
-    rgba(0, 0, 0, 1) 100%
-  );
-
+.cardLink:focus-visible {
+  outline: 2px solid var(--lr-pink);
+  outline-offset: 3px;
 }
 
-.imageCafecitoContainer {
-  display: flex;
-  border-radius: 12px;
-  padding: 5px;
-  background-color: rgba(137, 163, 209, 1);
-
-}
-
-.imageCafecitoContainer img {
-  width: 100px;
-  height: 100px;
-  border-radius: 12px;
-  border: 1px solid white;
-  margin-right: -15px;
-}
-
-.imageCafecitoContainer p {
-  width: 100%;
-  text-decoration: none;
-  color: whitesmoke;
-
-  text-align: center;
-  font-size: 20px;
-}
-
-.imageContainer img {
-  width: 100px;
-  height: 100px;
-  border-radius: 12px;
-  border: 1px solid white;
-  margin-right: -15px;
-}
-
-.imageContainer p {
-  width: 100%;
-  color: #759d5b;
-  text-align: center;
-  font-size: 20px;
-}
-
-@media(width >= 1200px){
-  .mainContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+@media (hover: hover) and (pointer: fine) {
+  .cardLink:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 18px 44px rgba(45, 32, 38, 0.1),
+      0 4px 14px rgba(232, 71, 139, 0.12);
+    border-color: rgba(232, 71, 139, 0.35);
   }
-  .mediaContainer{
-    width: 750px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardLink {
+    transition: none;
+  }
+
+  .cardLink:hover {
+    transform: none;
+  }
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.15rem 1.2rem 1.25rem;
+  flex: 1 1 auto;
+}
+
+.iconWrap {
+  flex-shrink: 0;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(
+    145deg,
+    rgba(254, 211, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  border: 1px solid rgba(232, 71, 139, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.textBlock {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: clamp(1.05rem, 2.4vw, 1.15rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--lr-ink);
+}
+
+.cardDescription {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--lr-muted);
+}
+
+.ctaRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--lr-pink-deep);
+}
+
+.ctaArrow {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cardLink:hover .ctaArrow {
+    transform: translateX(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ctaArrow {
+    transition: none;
+  }
+
+  .cardLink:hover .ctaArrow {
+    transform: none;
   }
 }
